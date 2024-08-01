@@ -1,0 +1,22 @@
+.years {
+  display: flex;
+  font-size: 200px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 160px;
+  letter-spacing: -4px;
+  position: absolute;
+  top: 40%;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.years__dateStart {
+  color: #5d5fef;
+  margin: 0;
+}
+
+.years__dateEnd {
+  color: #ef5da8;
+  margin: 0;
+}
