@@ -1,0 +1,21 @@
+@import '../../utils/variables.scss';
+
+.title {
+  margin: 177px 0 0 0;
+  border-left: 5px solid transparent;
+  border-image: linear-gradient(0deg, #ef5da8, #3877ee);
+  border-image-slice: 1;
+  height: 120px;
+
+  &__text {
+    padding-left: 73px;
+    color: $black-blue-color;
+    margin: 0;
+    font-size: 56px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+    position: relative;
+    top: -10px;
+  }
+}
