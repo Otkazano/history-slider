@@ -1,11 +1,14 @@
 import React from 'react';
 import './Title.scss';
 
-function Title() {
+const Title: React.FC = () => {
   return (
-    <div className="Title">
+    <div className="title">
+      <p className="title__text">
+        Исторические <br /> даты
+      </p>
     </div>
   );
-}
+};
 
 export default Title;
