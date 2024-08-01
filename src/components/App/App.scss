@@ -1,0 +1,11 @@
+@import '../../utils/variables.scss';
+
+.App {
+  max-width: 1440px;
+  width: 100%;
+  box-sizing: border-box;
+  flex-grow: 1;
+  border-left: 1px solid $border-color; 
+  border-right: 1px solid $border-color; 
+  margin: 0 auto;
+}
