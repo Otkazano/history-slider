@@ -6,9 +6,12 @@
   line-height: 160px;
   letter-spacing: -4px;
   position: absolute;
-  top: 40%;
+  top: 390px;
   width: 100%;
-  justify-content: space-around;
+  justify-content: flex-end;
+  padding-right: 255px;
+  box-sizing: border-box;
+  gap: 92px;
 }
 
 .years__dateStart {
