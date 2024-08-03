@@ -4,7 +4,7 @@ import Title from '../Title/Title';
 import { MockData } from '../../utils/Data/MockData';
 import Years from '../Years/Years';
 import { MockDataInit } from '../../utils/Data/DataTypes';
-import InfoSlider from '../Slider/Slider';
+import InfoSlider from '../InfoSlider/InfoSlider';
 import ChooseSphereButtons from '../ChooseSphereButtons/ChooseSphereButtons';
 
 const App: React.FC = () => {
