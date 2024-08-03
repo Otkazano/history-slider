@@ -12,10 +12,11 @@
 }
 
 .chooseButton {
+  font-size: 35px;
   width: 50px;
   height: 50px;
   border: 1px solid $black-blue-color;
-  opacity: 0.5;
+  // opacity: 0.5;
   border-radius: 50%;
   cursor: pointer;
   padding: 0;
@@ -33,4 +34,13 @@
 
 .chooseButton:last-of-type {
   margin-left: 20px;
+}
+
+.chooseButton__icon {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
+  pointer-events: none;
+  position: relative;
 }
