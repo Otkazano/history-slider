@@ -1,0 +1,64 @@
+@import '../../utils/variables.scss';
+
+.infoSlider {
+  padding: 0 80px 80px;
+  position: relative;
+
+  &__slide {
+    width: 320px;
+  }
+
+  &__year {
+    color: #3877ee;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 25px;
+    line-height: 30px;
+    text-transform: uppercase;
+    margin: 0 0 15px;
+  }
+
+  &__fact {
+    font-size: 20px;
+    line-height: 30px;
+    color: $black-blue-color;
+    margin: 0;
+  }
+
+  &__buttonPrev,
+  &__buttonNext {
+    padding: 0;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 40px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    background-color: #fff;
+    filter: drop-shadow(0px 0px 15px rgba(56, 119, 238, 0.1));
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  &__buttonPrev {
+    left: 20px;
+  }
+
+  &__buttonNext {
+    right: 20px;
+  }
+
+  .swiper-button-disabled {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .swiper-pagination {
+    display: none;
+  }
+}
