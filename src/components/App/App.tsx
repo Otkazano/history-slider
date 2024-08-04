@@ -6,6 +6,7 @@ import Years from '../Years/Years';
 import { MockDataInit } from '../../utils/Data/DataTypes';
 import InfoSlider from '../InfoSlider/InfoSlider';
 import ChooseSphereButtons from '../ChooseSphereButtons/ChooseSphereButtons';
+import CircleMenu from '../CircleMenu/CircleMenu';
 
 const App: React.FC = () => {
   const [mockData, setMockData] = useState<MockDataInit[]>(MockData);
@@ -21,6 +22,7 @@ const App: React.FC = () => {
         maxValue={MockData.length}
       />
       <InfoSlider data={mockData[selected]} />
+      <CircleMenu />
     </div>
   );
 };
