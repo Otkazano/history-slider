@@ -19,6 +19,7 @@ const ChooseSphereButtons: React.FC<ButtonsProps> = ({
       </p>
 
       <button
+        type="button"
         className="chooseButton"
         onClick={() => {
           if (currentSelected === 0) {
@@ -27,8 +28,15 @@ const ChooseSphereButtons: React.FC<ButtonsProps> = ({
             setNewSelected(currentSelected - 1);
           }
         }}
-      ></button>
+      >
+        <span className="chooseButton__icon">
+          <svg width="24" height="24" role="none" viewBox="0 0 16 16">
+            <path d="M9.6 4l-4 4 4 4 .8-.8L7.2 8l3.2-3.2z" fill="#42567A"></path>
+          </svg>
+        </span>
+      </button>
       <button
+        type="button"
         className="chooseButton"
         onClick={() => {
           if (currentSelected === maxValue - 1) {
@@ -37,7 +45,13 @@ const ChooseSphereButtons: React.FC<ButtonsProps> = ({
             setNewSelected(currentSelected + 1);
           }
         }}
-      ></button>
+      >
+        <span className="chooseButton__icon">
+          <svg width="24" height="24" role="none" viewBox="0 0 16 16">
+            <path d="M6.4 12l4-4-4-4-.8.8L8.8 8l-3.2 3.2z" fill="#42567A"></path>
+          </svg>
+        </span>
+      </button>
     </div>
   );
 };
