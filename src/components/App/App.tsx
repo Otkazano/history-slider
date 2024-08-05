@@ -22,7 +22,7 @@ const App: React.FC = () => {
         maxValue={MockData.length}
       />
       <InfoSlider data={mockData[selected]} />
-      <CircleMenu />
+      <CircleMenu data={mockData} currentSelected={selected} setNewSelected={setSelected} />
     </div>
   );
 };

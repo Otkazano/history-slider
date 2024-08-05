@@ -1,28 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { gsap } from 'gsap';
 import './CircleMenu.scss';
+import { MockDataInit } from '../../utils/Data/DataTypes';
 
-const CircleMenu: React.FC = () => {
-  const buttons = ['Button 1', 'Button 2', 'Button 3'];
-  const [selectedIndex, setSelectedIndex] = useState<number>(0);
+interface CircleMenuProps {
+  data: MockDataInit[];
+  currentSelected: number;
+  setNewSelected: (value: number) => void;
+}
+
+const CircleMenu: React.FC<CircleMenuProps> = ({ data, currentSelected, setNewSelected }) => {
+  const buttons = data;
 
   useEffect(() => {
     const angle = 360 / buttons.length;
-    const rotation = -angle * selectedIndex;
+    const rotation = -angle * currentSelected - 45;
 
     gsap.to('.circle-menu', {
       rotation: rotation,
-      duration: 0.5,
-      ease: 'power2.out',
-      transformOrigin: '50% 50%',
+      duration: 1,
+      ease: 'sine.inOut',
+      transformOrigin: 'center center',
     });
-  }, [selectedIndex]);
-
-  const handleClick = (index: number) => {
-    if (index !== selectedIndex) {
-      setSelectedIndex(index);
-    }
-  };
+  }, [currentSelected, buttons.length]);
 
   return (
     <div className="circle-menu-wrapper">
@@ -31,13 +31,15 @@ const CircleMenu: React.FC = () => {
         {buttons.map((button, index) => (
           <div
             key={index}
-            className={`circle-item ${selectedIndex === index ? 'selected' : ''}`}
-            onClick={() => handleClick(index)}
+            className={`circle-item ${currentSelected === index ? 'selected' : ''}`}
+            onClick={() => setNewSelected(index)}
             style={{
-              transform: `rotate(${(360 / buttons.length) * index}deg) translateX(150px) rotate(${-((360 / buttons.length) * index)}deg)`,
+              transform: `rotate(${(360 / buttons.length) * index}deg) translateX(264px)`,
             }}
           >
-            {button}
+            <div className="circle-item-content">
+              <div className="circle-item-text">{index + 1}</div>
+            </div>
           </div>
         ))}
       </div>
