@@ -14,33 +14,47 @@ const CircleMenu: React.FC<CircleMenuProps> = ({ data, currentSelected, setNewSe
 
   useEffect(() => {
     const angle = 360 / buttons.length;
-    const rotation = -angle * currentSelected - 45;
+    const rotation = -angle * currentSelected - 60;
 
-    gsap.to('.circle-menu', {
+    gsap.to('.circleMenu', {
       rotation: rotation,
       duration: 1,
       ease: 'sine.inOut',
       transformOrigin: 'center center',
     });
+
+    buttons.forEach((button, index) => {
+      const buttonAngle = (360 / buttons.length) * index + rotation;
+      gsap.to(`.circleMenu__button-text-container-${index}`, {
+        rotation: -buttonAngle,
+        duration: 1,
+        ease: 'sine.inOut',
+        transformOrigin: 'center center',
+      });
+    });
   }, [currentSelected, buttons.length]);
 
   return (
-    <div className="circle-menu-wrapper">
-      <div className="circle-background"></div>
-      <div className="circle-menu">
+    <div className="circleMenu__wrapper">
+      <div className="circleMenu__background"></div>
+      <div className="circleMenu">
         {buttons.map((button, index) => (
-          <div
+          <button
+            type="button"
             key={index}
-            className={`circle-item ${currentSelected === index ? 'selected' : ''}`}
+            className={`circleMenu__button ${currentSelected === index ? 'selected' : ''}`}
             onClick={() => setNewSelected(index)}
             style={{
-              transform: `rotate(${(360 / buttons.length) * index}deg) translateX(264px)`,
+              transform: `rotate(${(360 / buttons.length) * index}deg) translateX(265px)`,
             }}
           >
-            <div className="circle-item-content">
-              <div className="circle-item-text">{index + 1}</div>
+            <div
+              className={`circleMenu__button-text-container circleMenu__button-text-container-${index}`}
+            >
+              <p className="circleMenu__button-text">{index + 1}</p>
+              {/* <p className="circleMenu__button-title">{button.title}</p> */}
             </div>
-          </div>
+          </button>
         ))}
       </div>
     </div>
