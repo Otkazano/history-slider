@@ -1,44 +1,60 @@
 import React, { useState, useEffect } from 'react';
 import { gsap } from 'gsap';
 import './CircleMenu.scss';
+import { MockDataInit } from '../../utils/Data/DataTypes';
 
-const CircleMenu: React.FC = () => {
-  const buttons = ['Button 1', 'Button 2', 'Button 3'];
-  const [selectedIndex, setSelectedIndex] = useState<number>(0);
+interface CircleMenuProps {
+  data: MockDataInit[];
+  currentSelected: number;
+  setNewSelected: (value: number) => void;
+}
+
+const CircleMenu: React.FC<CircleMenuProps> = ({ data, currentSelected, setNewSelected }) => {
+  const buttons = data;
 
   useEffect(() => {
     const angle = 360 / buttons.length;
-    const rotation = -angle * selectedIndex;
+    const rotation = -angle * currentSelected - 60;
 
-    gsap.to('.circle-menu', {
+    gsap.to('.circleMenu', {
       rotation: rotation,
-      duration: 0.5,
-      ease: 'power2.out',
-      transformOrigin: '50% 50%',
+      duration: 1,
+      ease: 'sine.inOut',
+      transformOrigin: 'center center',
     });
-  }, [selectedIndex]);
 
-  const handleClick = (index: number) => {
-    if (index !== selectedIndex) {
-      setSelectedIndex(index);
-    }
-  };
+    buttons.forEach((button, index) => {
+      const buttonAngle = (360 / buttons.length) * index + rotation;
+      gsap.to(`.circleMenu__button-text-container-${index}`, {
+        rotation: -buttonAngle,
+        duration: 1,
+        ease: 'sine.inOut',
+        transformOrigin: 'center center',
+      });
+    });
+  }, [currentSelected, buttons.length]);
 
   return (
-    <div className="circle-menu-wrapper">
-      <div className="circle-background"></div>
-      <div className="circle-menu">
+    <div className="circleMenu__wrapper">
+      <div className="circleMenu__background"></div>
+      <div className="circleMenu">
         {buttons.map((button, index) => (
-          <div
+          <button
+            type="button"
             key={index}
-            className={`circle-item ${selectedIndex === index ? 'selected' : ''}`}
-            onClick={() => handleClick(index)}
+            className={`circleMenu__button ${currentSelected === index ? 'selected' : ''}`}
+            onClick={() => setNewSelected(index)}
             style={{
-              transform: `rotate(${(360 / buttons.length) * index}deg) translateX(150px) rotate(${-((360 / buttons.length) * index)}deg)`,
+              transform: `rotate(${(360 / buttons.length) * index}deg) translateX(265px)`,
             }}
           >
-            {button}
-          </div>
+            <div
+              className={`circleMenu__button-text-container circleMenu__button-text-container-${index}`}
+            >
+              <p className="circleMenu__button-text">{index + 1}</p>
+              {/* <p className="circleMenu__button-title">{button.title}</p> */}
+            </div>
+          </button>
         ))}
       </div>
     </div>
