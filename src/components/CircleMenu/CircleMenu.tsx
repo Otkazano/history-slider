@@ -16,7 +16,7 @@ const CircleMenu: React.FC<CircleMenuProps> = ({ data, currentSelected, setNewSe
     const angle = 360 / buttons.length;
     const rotation = -angle * currentSelected - 60;
 
-    gsap.to('.circleMenu', {
+    gsap.to('.circle-menu__container', {
       rotation: rotation,
       duration: 1,
       ease: 'sine.inOut',
@@ -25,7 +25,7 @@ const CircleMenu: React.FC<CircleMenuProps> = ({ data, currentSelected, setNewSe
 
     buttons.forEach((button, index) => {
       const buttonAngle = (360 / buttons.length) * index + rotation;
-      gsap.to(`.circleMenu__button-text-container-${index}`, {
+      gsap.to(`.circle-menu__button-text-container-${index}`, {
         rotation: -buttonAngle,
         duration: 1,
         ease: 'sine.inOut',
@@ -35,24 +35,28 @@ const CircleMenu: React.FC<CircleMenuProps> = ({ data, currentSelected, setNewSe
   }, [currentSelected, buttons.length]);
 
   return (
-    <div className="circleMenu__wrapper">
-      <div className="circleMenu__background"></div>
-      <div className="circleMenu">
+    <div className="circle-menu__wrapper">
+      <div className="circle-menu__background"></div>
+      <div className="circle-menu__container">
         {buttons.map((button, index) => (
           <button
             type="button"
             key={index}
-            className={`circleMenu__button ${currentSelected === index ? 'selected' : ''}`}
+            className={`circle-menu__button ${currentSelected === index ? 'circle-menu__button-selected' : ''}`}
             onClick={() => setNewSelected(index)}
             style={{
               transform: `rotate(${(360 / buttons.length) * index}deg) translateX(265px)`,
             }}
           >
             <div
-              className={`circleMenu__button-text-container circleMenu__button-text-container-${index}`}
+              className={`circle-menu__button-text-container circle-menu__button-text-container-${index}`}
             >
-              <p className="circleMenu__button-text">{index + 1}</p>
-              {/* <p className="circleMenu__button-title">{button.title}</p> */}
+              <p className="circle-menu__button-text">{index + 1}</p>
+              <p
+                className={`circle-menu__button-title ${currentSelected === index ? 'circle-menu__button-title-selected' : ''}`}
+              >
+                {button.title}
+              </p>
             </div>
           </button>
         ))}

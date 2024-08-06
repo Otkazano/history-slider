@@ -13,15 +13,17 @@ const App: React.FC = () => {
   const [selected, setSelected] = useState<number>(0);
 
   return (
-    <div className="App">
+    <div className="app">
       <Title />
       <Years data={mockData[selected]} />
-      <ChooseSphereButtons
-        currentSelected={selected}
-        setNewSelected={setSelected}
-        maxValue={MockData.length}
-      />
-      <InfoSlider data={mockData[selected]} />
+      <div>
+        <ChooseSphereButtons
+          currentSelected={selected}
+          setNewSelected={setSelected}
+          maxValue={MockData.length}
+        />
+        <InfoSlider data={mockData[selected]} />
+      </div>
       <CircleMenu data={mockData} currentSelected={selected} setNewSelected={setSelected} />
     </div>
   );
