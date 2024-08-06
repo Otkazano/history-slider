@@ -1,20 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { gsap } from 'gsap';
 import './CircleMenu.scss';
-import { MockDataInit } from '../../utils/Data/DataTypes';
+import { useDataContext } from '../../contexts/DataContext';
 
-interface CircleMenuProps {
-  data: MockDataInit[];
-  currentSelected: number;
-  setNewSelected: (value: number) => void;
-}
-
-const CircleMenu: React.FC<CircleMenuProps> = ({ data, currentSelected, setNewSelected }) => {
+const CircleMenu: React.FC = () => {
+  const { data, selected, setSelected } = useDataContext();
   const buttons = data;
 
   useEffect(() => {
     const angle = 360 / buttons.length;
-    const rotation = -angle * currentSelected - 60;
+    const rotation = -angle * selected - 60;
 
     gsap.to('.circle-menu__container', {
       rotation: rotation,
@@ -32,7 +27,7 @@ const CircleMenu: React.FC<CircleMenuProps> = ({ data, currentSelected, setNewSe
         transformOrigin: 'center center',
       });
     });
-  }, [currentSelected, buttons.length]);
+  }, [selected, buttons.length]);
 
   return (
     <div className="circle-menu__wrapper">
@@ -42,18 +37,19 @@ const CircleMenu: React.FC<CircleMenuProps> = ({ data, currentSelected, setNewSe
           <button
             type="button"
             key={index}
-            className={`circle-menu__button ${currentSelected === index ? 'circle-menu__button-selected' : ''}`}
-            onClick={() => setNewSelected(index)}
+            className={`circle-menu__button ${selected === index ? 'circle-menu__button-selected' : ''}`}
+            onClick={() => setSelected(index)}
             style={{
               transform: `rotate(${(360 / buttons.length) * index}deg) translateX(265px)`,
             }}
+            aria-label={button.title}
           >
             <div
               className={`circle-menu__button-text-container circle-menu__button-text-container-${index}`}
             >
               <p className="circle-menu__button-text">{index + 1}</p>
               <p
-                className={`circle-menu__button-title ${currentSelected === index ? 'circle-menu__button-title-selected' : ''}`}
+                className={`circle-menu__button-title ${selected === index ? 'circle-menu__button-title-selected' : ''}`}
               >
                 {button.title}
               </p>

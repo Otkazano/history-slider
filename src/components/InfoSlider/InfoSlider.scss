@@ -64,14 +64,14 @@
   .swiper-pagination {
     display: none;
   }
-}
 
-.infoSlider__buttonIcon {
-  display: flex;
-  align-items: center;
-  height: 100%;
-  justify-content: center;
-  pointer-events: none;
-  position: relative;
-  color: $black-blue-color;
+  &__buttonIcon {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    justify-content: center;
+    pointer-events: none;
+    position: relative;
+    color: $black-blue-color;
+  }
 }
