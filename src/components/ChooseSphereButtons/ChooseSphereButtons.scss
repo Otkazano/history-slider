@@ -41,4 +41,10 @@
     pointer-events: none;
     position: relative;
   }
+
+  @media (max-width: 1400px) {
+    &__container {
+      padding-left: 36px;
+    }
+  }
 }

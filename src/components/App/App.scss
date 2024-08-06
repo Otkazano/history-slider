@@ -45,5 +45,13 @@
   }
 
   @media (max-width: 1023px) {
+    &::before {
+      top: 350px;
+    }
+
+    &::after {
+      left: auto;
+      right: 345px;
+    }
   }
 }

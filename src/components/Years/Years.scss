@@ -46,6 +46,11 @@
   }
 
   @media (max-width: 1023px) {
-    font-size: 130px;
+    font-size: 125px;
+    width: fit-content;
+    margin-left: auto;
+    padding-right: 35px;
+    box-sizing: border-box;
+    gap: 92px;
   }
 }

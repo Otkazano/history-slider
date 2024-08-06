@@ -74,4 +74,13 @@
     position: relative;
     color: $black-blue-color;
   }
+
+  @media (max-width: 1400px) {
+    padding-left: 36px;
+  }
+  // @media (max-width: 1023px) {
+  //   margin: 85px 0 0 0;
+  //   font-size: 40px;
+  //   height: 85px;
+  // }
 }

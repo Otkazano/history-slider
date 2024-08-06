@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import './CircleMenu.scss';
 import { useDataContext } from '../../contexts/DataContext';
@@ -6,6 +6,26 @@ import { useDataContext } from '../../contexts/DataContext';
 const CircleMenu: React.FC = () => {
   const { data, selected, setSelected } = useDataContext();
   const buttons = data;
+  const [translateX, setTranslateX] = useState(265);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const screenWidth = window.innerWidth;
+
+      if (screenWidth <= 1023) {
+        setTranslateX(180);
+      } else {
+        setTranslateX(265);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     const angle = 360 / buttons.length;
@@ -40,7 +60,7 @@ const CircleMenu: React.FC = () => {
             className={`circle-menu__button ${selected === index ? 'circle-menu__button-selected' : ''}`}
             onClick={() => setSelected(index)}
             style={{
-              transform: `rotate(${(360 / buttons.length) * index}deg) translateX(265px)`,
+              transform: `rotate(${(360 / buttons.length) * index}deg) translateX(${translateX}px)`,
             }}
             aria-label={button.title}
           >
