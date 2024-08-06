@@ -3,11 +3,11 @@ import './Title.scss';
 
 const Title: React.FC = () => {
   return (
-    <div className="title">
+    <h1 className="title">
       <p className="title__text">
         Исторические <br /> даты
       </p>
-    </div>
+    </h1>
   );
 };
 
