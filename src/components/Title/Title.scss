@@ -6,12 +6,12 @@
   border-image-slice: 1;
   height: 120px;
   margin: 177px 0 0 0;
+  font-size: 56px;
 
   &__text {
     padding-left: 73px;
     color: $black-blue-color;
     margin: 0;
-    font-size: 56px;
     font-style: normal;
     font-weight: 700;
     line-height: 120%;
@@ -23,5 +23,10 @@
     &__text {
       padding-left: 36px;
     }
+  }
+
+  @media (max-width: 1023px) {
+    margin: 85px 0 0 0;
+    font-size: 56px;
   }
 }

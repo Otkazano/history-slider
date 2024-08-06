@@ -44,4 +44,8 @@
     gap: 0;
     justify-content: space-between;
   }
+
+  @media (max-width: 1023px) {
+    font-size: 130px;
+  }
 }
