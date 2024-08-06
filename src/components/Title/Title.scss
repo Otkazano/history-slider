@@ -18,4 +18,10 @@
     position: relative;
     top: -10px;
   }
+
+  @media (max-width: 1400px) {
+    &__text {
+      padding-left: 36px;
+    }
+  }
 }

@@ -24,10 +24,26 @@
     content: '';
     position: absolute;
     width: 1px;
-    left: 50%;
+    left: 720px;
     top: 0;
     height: 100%;
     background-color: $border-color;
     z-index: -1;
+  }
+
+  @media (max-width: 1400px) {
+    &::after {
+      left: auto;
+      right: 500px;
+    }
+  }
+
+  @media (max-width: 1100px) {
+    &::after {
+      right: 490px;
+    }
+  }
+
+  @media (max-width: 1023px) {
   }
 }

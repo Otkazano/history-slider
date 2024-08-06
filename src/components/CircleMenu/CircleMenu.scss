@@ -88,4 +88,17 @@
       opacity: 1;
     }
   }
+
+  @media (max-width: 1400px) {
+    &__wrapper {
+      left: auto;
+      right: 236px;
+    }
+  }
+
+  @media (max-width: 1100px) {
+    &__wrapper {
+      right: 226px;
+    }
+  }
 }

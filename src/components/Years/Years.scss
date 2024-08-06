@@ -1,16 +1,14 @@
 .years {
   display: flex;
   font-size: 200px;
-  font-style: normal;
   font-weight: 700;
   line-height: 160px;
   letter-spacing: -4px;
-  width: 100%;
-  justify-content: flex-end;
-  padding-right: 255px;
+  width: fit-content;
+  margin: 90px 0 0 217px;
+  padding-right: 35px;
   box-sizing: border-box;
   gap: 92px;
-  margin-top: 90px;
 
   &__dateStart,
   &__dateEnd {
@@ -33,5 +31,17 @@
 
   &__dateEnd {
     color: #ef5da8;
+  }
+
+  @media (max-width: 1400px) {
+    margin-left: auto;
+  }
+
+  @media (max-width: 1100px) {
+    padding: 0 10px;
+    width: 100%;
+    margin-left: 0;
+    gap: 0;
+    justify-content: space-between;
   }
 }
