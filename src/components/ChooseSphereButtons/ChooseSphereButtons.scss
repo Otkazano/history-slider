@@ -6,15 +6,15 @@
   }
 
   &__numbers {
-    color: $black-blue-color;
-    font-size: 14px;
+    color: $color-black-blue;
+    font-size: $font-size-xsmall;
     line-height: normal;
     margin: 0 0 20px 0;
   }
   &__button {
     width: 50px;
     height: 50px;
-    border: 1px solid $black-blue-color;
+    border: 1px solid $color-black-blue;
     border-radius: 50%;
     cursor: pointer;
     padding: 0;
@@ -43,13 +43,13 @@
 
   @media (max-width: 1400px) {
     &__container {
-      padding-left: 50px;
+      padding-left: $padding-medium-large;
     }
   }
 
   @media (max-width: 1023px) {
     &__container {
-      padding: 100px 0 48px 50px;
+      padding: 100px 0 48px $padding-medium-large;
     }
 
     &__numbers {
@@ -61,6 +61,24 @@
       height: 40px;
       &:last-of-type {
         margin-left: 15px;
+      }
+    }
+  }
+
+  @media (max-width: 767px) {
+    &__container {
+      padding: 37px 0 0 0;
+    }
+
+    &__numbers {
+      margin: 0 0 10px 0;
+    }
+
+    &__button {
+      width: 25px;
+      height: 25px;
+      &:last-of-type {
+        margin-left: 8px;
       }
     }
   }

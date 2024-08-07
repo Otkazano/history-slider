@@ -54,4 +54,16 @@
       right: 345px;
     }
   }
+
+  @media (max-width: 767px) {
+    border: none;
+    &::before,
+    &::after {
+      display: none;
+    }
+    .sliderContainer {
+      display: flex;
+      flex-direction: column-reverse;
+    }
+  }
 }

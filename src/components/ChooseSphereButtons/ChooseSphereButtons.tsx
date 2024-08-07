@@ -6,23 +6,24 @@ const ChooseSphereButtons: React.FC = () => {
   const { data, selected, setSelected } = useDataContext();
   const maxValue = data.length;
 
+  const handleChangeSelection = (direction: 'prev' | 'next') => {
+    setSelected(prevSelected => {
+      if (direction === 'prev') {
+        return (prevSelected - 1 + maxValue) % maxValue;
+      }
+      return (prevSelected + 1) % maxValue;
+    });
+  };
+
   return (
     <div className="chooseSphere__container">
-      <p className="chooseSphere__numbers">
-        0{selected + 1}&#47;0{maxValue}
-      </p>
+      <p className="chooseSphere__numbers">{`0${selected + 1} / 0${maxValue}`}</p>
 
       <button
         type="button"
         className="chooseSphere__button"
         aria-label="Предыдущий элемент"
-        onClick={() => {
-          if (selected === 0) {
-            setSelected(maxValue - 1);
-          } else {
-            setSelected(selected - 1);
-          }
-        }}
+        onClick={() => handleChangeSelection('prev')}
       >
         <span className="chooseSphere__button-icon">
           <svg width="24" height="24" role="none" viewBox="0 0 16 16">
@@ -34,13 +35,7 @@ const ChooseSphereButtons: React.FC = () => {
         type="button"
         className="chooseSphere__button"
         aria-label="Следующий элемент"
-        onClick={() => {
-          if (selected === maxValue - 1) {
-            setSelected(0);
-          } else {
-            setSelected(selected + 1);
-          }
-        }}
+        onClick={() => handleChangeSelection('next')}
       >
         <span className="chooseSphere__button-icon">
           <svg width="24" height="24" role="none" viewBox="0 0 16 16">

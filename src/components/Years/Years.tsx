@@ -10,18 +10,18 @@ const Years: React.FC = () => {
   const [currentYears, setCurrentYears] = useState(data[selected].years);
 
   useEffect(() => {
-    const animateYearChange = (
-      startElement: HTMLDivElement,
-      endElement: HTMLDivElement,
-      oldStart: number,
-      newStart: number,
-      oldEnd: number,
-      newEnd: number,
-    ) => {
-      if (!startElement || !endElement) return;
+    const duration = 1;
 
-      const duration = 1;
+    const startElement = startRef.current;
+    const endElement = endRef.current;
 
+    if (startElement && endElement) {
+      const oldStart = currentYears.start;
+      const newStart = data[selected].years.start;
+      const oldEnd = currentYears.end;
+      const newEnd = data[selected].years.end;
+
+      // Animate year changes
       const yearUpdate = (element: HTMLDivElement, startValue: number, endValue: number) => {
         gsap.to(
           {},
@@ -38,32 +38,13 @@ const Years: React.FC = () => {
 
       yearUpdate(startElement, oldStart, newStart);
       yearUpdate(endElement, oldEnd, newEnd);
-    };
 
-    const renderYear = (value: number, ref: React.RefObject<HTMLDivElement>) => {
-      if (ref.current) {
-        ref.current.textContent = value.toString();
-      }
-    };
-
-    if (startRef.current && endRef.current) {
-      const oldStart = currentYears.start;
-      const newStart = data[selected].years.start;
-      const oldEnd = currentYears.end;
-      const newEnd = data[selected].years.end;
-
-      renderYear(oldStart, startRef);
-      renderYear(oldEnd, endRef);
-
-      animateYearChange(startRef.current, endRef.current, oldStart, newStart, oldEnd, newEnd);
-
-      const updateState = () => {
+      // Update state after animation
+      gsap.delayedCall(duration, () => {
         setCurrentYears(data[selected].years);
-      };
-
-      gsap.delayedCall(2, updateState);
+      });
     }
-  }, [selected, data]);
+  }, [selected, data, currentYears]);
 
   return (
     <div className="years">

@@ -1,6 +1,6 @@
 @import '../../utils/variables.scss';
 
-.circle-menu {
+.circleMenu {
   &__wrapper {
     position: absolute;
     width: 530px;
@@ -31,7 +31,7 @@
     width: 6px;
     height: 6px;
     padding: 0;
-    background-color: $black-blue-color;
+    background-color: $color-black-blue;
     border-radius: 50%;
     border: none;
     display: flex;
@@ -65,7 +65,7 @@
       border: 1px solid rgba(48, 62, 88, 0.5);
       background-color: rgba(244, 245, 249, 1);
 
-      & .circle-menu__button-text {
+      & .circleMenu__button-text {
         opacity: 1;
       }
     }
@@ -76,7 +76,7 @@
   }
 
   &__button-title {
-    color: $black-blue-color;
+    color: $color-black-blue;
     font-size: 20px;
     font-weight: 700;
     line-height: 30px;
@@ -109,6 +109,12 @@
       right: 167px;
       width: 360px;
       height: 360px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    &__wrapper {
+      display: none;
     }
   }
 }

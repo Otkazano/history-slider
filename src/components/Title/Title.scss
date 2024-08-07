@@ -6,13 +6,12 @@
   border-image-slice: 1;
   height: 120px;
   margin: 177px 0 0 0;
-  font-size: 56px;
+  font-size: $font-size-small;
 
   &__text {
     padding-left: 73px;
-    color: $black-blue-color;
+    color: $color-black-blue;
     margin: 0;
-    font-style: normal;
     font-weight: 700;
     line-height: 120%;
     position: relative;
@@ -21,7 +20,7 @@
 
   @media (max-width: 1400px) {
     &__text {
-      padding-left: 50px;
+      padding-left: $padding-medium-large;
     }
   }
 
@@ -29,5 +28,16 @@
     margin: 85px 0 0 0;
     font-size: 40px;
     height: 85px;
+  }
+
+  @media (max-width: 767px) {
+    border: none;
+    margin: 37px 0 0 0;
+    height: fit-content;
+    &__text {
+      padding: 0;
+      font-size: 20px;
+      top: 0;
+    }
   }
 }

@@ -1,7 +1,7 @@
 @import '../../utils/variables.scss';
 
 .infoSlider {
-  padding: 0 80px 80px;
+  padding: 0 $padding-large $padding-large;
   position: relative;
 
   &__slide {
@@ -9,7 +9,7 @@
   }
 
   &__year {
-    color: #3877ee;
+    color: $color-dark;
     font-family: 'Bebas Neue', sans-serif;
     font-size: 25px;
     line-height: 30px;
@@ -20,7 +20,7 @@
   &__fact {
     font-size: 20px;
     line-height: 30px;
-    color: $black-blue-color;
+    color: $color-black-blue;
     margin: 0;
   }
 
@@ -72,7 +72,7 @@
     justify-content: center;
     pointer-events: none;
     position: relative;
-    color: $black-blue-color;
+    color: $color-black-blue;
   }
 
   @media (max-width: 1400px) {
@@ -92,11 +92,46 @@
 
     &__year {
       font-size: 22px;
-      margin: 0 0 10px;
+      margin: 0 0 15px;
     }
 
     &__fact {
       font-size: 18px;
+    }
+  }
+  @media (max-width: 767px) {
+    padding: 15px 0 0 0;
+    border-top: 1px solid $border-color;
+
+    &__buttonPrev,
+    &__buttonNext {
+      display: none;
+    }
+    &__slide {
+      width: 170px;
+    }
+    &__year {
+      font-size: 16px;
+      margin: 0 0 7px;
+    }
+
+    &__fact {
+      font-size: $font-size-xsmall;
+      line-height: 20.3px;
+    }
+
+    .swiper-pagination {
+      display: block;
+      position: fixed;
+      top: 135%;
+    }
+
+    .swiper-pagination-bullet-active {
+      background-color: $color-black-blue;
+    }
+    .swiper-pagination-bullet {
+      height: 6px;
+      width: 6px;
     }
   }
 }

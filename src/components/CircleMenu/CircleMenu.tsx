@@ -34,7 +34,7 @@ const CircleMenu: React.FC = () => {
 
     setAnimatedIndex(null);
 
-    gsap.to('.circle-menu__container', {
+    gsap.to('.circleMenu__container', {
       rotation: rotation,
       duration: 1,
       ease: 'sine.inOut',
@@ -43,7 +43,7 @@ const CircleMenu: React.FC = () => {
 
     buttons.forEach((button, index) => {
       const buttonAngle = (360 / buttons.length) * index + rotation;
-      gsap.to(`.circle-menu__button-text-container-${index}`, {
+      gsap.to(`.circleMenu__button-text-container-${index}`, {
         rotation: -buttonAngle,
         duration: 1,
         ease: 'sine.inOut',
@@ -58,14 +58,14 @@ const CircleMenu: React.FC = () => {
   }, [selected, buttons.length]);
 
   return (
-    <div className="circle-menu__wrapper">
-      <div className="circle-menu__background"></div>
-      <div className="circle-menu__container">
+    <div className="circleMenu__wrapper">
+      <div className="circleMenu__background"></div>
+      <div className="circleMenu__container">
         {buttons.map((button, index) => (
           <button
             type="button"
             key={index}
-            className={`circle-menu__button ${selected === index ? 'circle-menu__button-selected' : ''}`}
+            className={`circleMenu__button ${selected === index ? 'circleMenu__button-selected' : ''}`}
             onClick={() => setSelected(index)}
             style={{
               transform: `rotate(${(360 / buttons.length) * index}deg) translateX(${translateX}px)`,
@@ -73,11 +73,11 @@ const CircleMenu: React.FC = () => {
             aria-label={button.title}
           >
             <div
-              className={`circle-menu__button-text-container circle-menu__button-text-container-${index}`}
+              className={`circleMenu__button-text-container circleMenu__button-text-container-${index}`}
             >
-              <p className="circle-menu__button-text">{index + 1}</p>
+              <p className="circleMenu__button-text">{index + 1}</p>
               <p
-                className={`circle-menu__button-title ${animatedIndex === index ? 'circle-menu__button-title-selected' : ''}`}
+                className={`circleMenu__button-title ${animatedIndex === index ? 'circleMenu__button-title-selected' : ''}`}
               >
                 {button.title}
               </p>
