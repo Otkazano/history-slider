@@ -12,7 +12,29 @@ import { useDataContext } from '../../contexts/DataContext';
 const InfoSlider: React.FC = () => {
   const { data, selected } = useDataContext();
   const [displayedSelected, setDisplayedSelected] = useState(selected);
+  const [spaceBetween, setSpaceBetween] = useState(80);
   const sliderRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const screenWidth = window.innerWidth;
+
+      if (screenWidth <= 767) {
+        setSpaceBetween(20);
+      } else if (screenWidth <= 1023) {
+        setSpaceBetween(40);
+      } else {
+        setSpaceBetween(80);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     if (sliderRef.current) {
@@ -42,8 +64,7 @@ const InfoSlider: React.FC = () => {
   return (
     <div className="infoSlider" ref={sliderRef} aria-live="polite" aria-atomic="true">
       <Swiper
-        className="infoSlider__container"
-        spaceBetween={80}
+        spaceBetween={spaceBetween}
         slidesPerView="auto"
         pagination={{
           clickable: true,

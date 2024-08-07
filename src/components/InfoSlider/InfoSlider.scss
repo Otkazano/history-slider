@@ -76,11 +76,27 @@
   }
 
   @media (max-width: 1400px) {
-    padding-left: 36px;
+    padding-left: 50px;
+    &__buttonPrev {
+      left: 5px;
+    }
+    &__buttonNext {
+      right: 5px;
+    }
   }
-  // @media (max-width: 1023px) {
-  //   margin: 85px 0 0 0;
-  //   font-size: 40px;
-  //   height: 85px;
-  // }
+
+  @media (max-width: 1023px) {
+    &__slide {
+      width: 250px;
+    }
+
+    &__year {
+      font-size: 22px;
+      margin: 0 0 10px;
+    }
+
+    &__fact {
+      font-size: 18px;
+    }
+  }
 }

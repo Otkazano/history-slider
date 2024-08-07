@@ -7,6 +7,7 @@ const CircleMenu: React.FC = () => {
   const { data, selected, setSelected } = useDataContext();
   const buttons = data;
   const [translateX, setTranslateX] = useState(265);
+  const [animatedIndex, setAnimatedIndex] = useState<number | null>(selected);
 
   useEffect(() => {
     const handleResize = () => {
@@ -31,6 +32,8 @@ const CircleMenu: React.FC = () => {
     const angle = 360 / buttons.length;
     const rotation = -angle * selected - 60;
 
+    setAnimatedIndex(null);
+
     gsap.to('.circle-menu__container', {
       rotation: rotation,
       duration: 1,
@@ -45,6 +48,11 @@ const CircleMenu: React.FC = () => {
         duration: 1,
         ease: 'sine.inOut',
         transformOrigin: 'center center',
+        onComplete: () => {
+          if (index === selected) {
+            setAnimatedIndex(selected);
+          }
+        },
       });
     });
   }, [selected, buttons.length]);
@@ -69,7 +77,7 @@ const CircleMenu: React.FC = () => {
             >
               <p className="circle-menu__button-text">{index + 1}</p>
               <p
-                className={`circle-menu__button-title ${selected === index ? 'circle-menu__button-title-selected' : ''}`}
+                className={`circle-menu__button-title ${animatedIndex === index ? 'circle-menu__button-title-selected' : ''}`}
               >
                 {button.title}
               </p>

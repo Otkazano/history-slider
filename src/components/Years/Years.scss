@@ -16,13 +16,6 @@
     display: inline-block;
     overflow: hidden;
     position: relative;
-
-    span {
-      display: inline-block;
-      transform-origin: bottom center;
-      will-change: transform;
-      transition: transform 0.5s ease-in-out;
-    }
   }
 
   &__dateStart {
