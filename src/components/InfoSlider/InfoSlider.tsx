@@ -1,18 +1,30 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { gsap } from 'gsap';
-
 import 'swiper/css';
 import 'swiper/css/pagination';
 import './InfoSlider.scss';
-
 import { Navigation, Pagination, FreeMode } from 'swiper/modules';
 import { useDataContext } from '../../contexts/DataContext';
 
 const InfoSlider: React.FC = () => {
   const { data, selected } = useDataContext();
   const [displayedSelected, setDisplayedSelected] = useState(selected);
+  const [spaceBetween, setSpaceBetween] = useState(80);
   const sliderRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const screenWidth = window.innerWidth;
+      const spacing = screenWidth <= 767 ? 25 : screenWidth <= 1023 ? 40 : 80;
+      setSpaceBetween(spacing);
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     if (sliderRef.current) {
@@ -23,16 +35,8 @@ const InfoSlider: React.FC = () => {
           setDisplayedSelected(selected);
           gsap.fromTo(
             sliderRef.current,
-            {
-              opacity: 0,
-              y: 50,
-            },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 1,
-              ease: 'power3.out',
-            },
+            { opacity: 0, y: 50 },
+            { opacity: 1, y: 0, duration: 1, ease: 'power3.out' },
           );
         },
       });
@@ -42,12 +46,9 @@ const InfoSlider: React.FC = () => {
   return (
     <div className="infoSlider" ref={sliderRef} aria-live="polite" aria-atomic="true">
       <Swiper
-        className="infoSlider__container"
-        spaceBetween={80}
+        spaceBetween={spaceBetween}
         slidesPerView="auto"
-        pagination={{
-          clickable: true,
-        }}
+        pagination={{ clickable: true }}
         modules={[Navigation, Pagination, FreeMode]}
         navigation={{
           nextEl: '.infoSlider__buttonNext',
@@ -55,7 +56,7 @@ const InfoSlider: React.FC = () => {
         }}
         aria-label="Слайдер информации"
       >
-        {data[displayedSelected].events.map((event, index) => (
+        {data[displayedSelected]?.events.map((event, index) => (
           <SwiperSlide
             key={index}
             className="infoSlider__slide"
@@ -68,14 +69,14 @@ const InfoSlider: React.FC = () => {
       </Swiper>
       <button type="button" className="infoSlider__buttonPrev" aria-label="Предыдущий слайд">
         <span className="infoSlider__buttonIcon">
-          <svg width="24" height="24" role="none" viewBox="0 0 16 16">
+          <svg width="24" height="24" viewBox="0 0 16 16">
             <path d="M9.6 4l-4 4 4 4 .8-.8L7.2 8l3.2-3.2z" fill="#3877EE"></path>
           </svg>
         </span>
       </button>
       <button type="button" className="infoSlider__buttonNext" aria-label="Следующий слайд">
         <span className="infoSlider__buttonIcon">
-          <svg width="24" height="24" role="none" viewBox="0 0 16 16">
+          <svg width="24" height="24" viewBox="0 0 16 16">
             <path d="M6.4 12l4-4-4-4-.8.8L8.8 8l-3.2 3.2z" fill="#3877EE"></path>
           </svg>
         </span>

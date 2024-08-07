@@ -11,7 +11,7 @@ const App: React.FC = () => {
     <div className="app">
       <Title />
       <Years />
-      <div>
+      <div className="sliderContainer">
         <ChooseSphereButtons />
         <InfoSlider />
       </div>

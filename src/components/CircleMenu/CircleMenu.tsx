@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import './CircleMenu.scss';
 import { useDataContext } from '../../contexts/DataContext';
@@ -6,12 +6,35 @@ import { useDataContext } from '../../contexts/DataContext';
 const CircleMenu: React.FC = () => {
   const { data, selected, setSelected } = useDataContext();
   const buttons = data;
+  const [translateX, setTranslateX] = useState(265);
+  const [animatedIndex, setAnimatedIndex] = useState<number | null>(selected);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const screenWidth = window.innerWidth;
+
+      if (screenWidth <= 1023) {
+        setTranslateX(180);
+      } else {
+        setTranslateX(265);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     const angle = 360 / buttons.length;
     const rotation = -angle * selected - 60;
 
-    gsap.to('.circle-menu__container', {
+    setAnimatedIndex(null);
+
+    gsap.to('.circleMenu__container', {
       rotation: rotation,
       duration: 1,
       ease: 'sine.inOut',
@@ -20,36 +43,41 @@ const CircleMenu: React.FC = () => {
 
     buttons.forEach((button, index) => {
       const buttonAngle = (360 / buttons.length) * index + rotation;
-      gsap.to(`.circle-menu__button-text-container-${index}`, {
+      gsap.to(`.circleMenu__button-text-container-${index}`, {
         rotation: -buttonAngle,
         duration: 1,
         ease: 'sine.inOut',
         transformOrigin: 'center center',
+        onComplete: () => {
+          if (index === selected) {
+            setAnimatedIndex(selected);
+          }
+        },
       });
     });
   }, [selected, buttons.length]);
 
   return (
-    <div className="circle-menu__wrapper">
-      <div className="circle-menu__background"></div>
-      <div className="circle-menu__container">
+    <div className="circleMenu__wrapper">
+      <div className="circleMenu__background"></div>
+      <div className="circleMenu__container">
         {buttons.map((button, index) => (
           <button
             type="button"
             key={index}
-            className={`circle-menu__button ${selected === index ? 'circle-menu__button-selected' : ''}`}
+            className={`circleMenu__button ${selected === index ? 'circleMenu__button-selected' : ''}`}
             onClick={() => setSelected(index)}
             style={{
-              transform: `rotate(${(360 / buttons.length) * index}deg) translateX(265px)`,
+              transform: `rotate(${(360 / buttons.length) * index}deg) translateX(${translateX}px)`,
             }}
             aria-label={button.title}
           >
             <div
-              className={`circle-menu__button-text-container circle-menu__button-text-container-${index}`}
+              className={`circleMenu__button-text-container circleMenu__button-text-container-${index}`}
             >
-              <p className="circle-menu__button-text">{index + 1}</p>
+              <p className="circleMenu__button-text">{index + 1}</p>
               <p
-                className={`circle-menu__button-title ${selected === index ? 'circle-menu__button-title-selected' : ''}`}
+                className={`circleMenu__button-title ${animatedIndex === index ? 'circleMenu__button-title-selected' : ''}`}
               >
                 {button.title}
               </p>

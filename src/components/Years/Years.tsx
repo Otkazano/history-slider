@@ -10,74 +10,41 @@ const Years: React.FC = () => {
   const [currentYears, setCurrentYears] = useState(data[selected].years);
 
   useEffect(() => {
-    const animateDigit = (element: HTMLDivElement, oldValue: string, newValue: string) => {
-      if (!element) return;
+    const duration = 1;
 
-      const oldDigits = oldValue.padStart(newValue.length, '0').split('');
-      const newDigits = newValue.padStart(oldValue.length, '0').split('');
+    const startElement = startRef.current;
+    const endElement = endRef.current;
 
-      oldDigits.forEach((digit, index) => {
-        if (digit !== newDigits[index]) {
-          gsap.fromTo(
-            element.children[index] as HTMLElement,
-            { textContent: digit },
-            {
-              textContent: newDigits[index],
-              duration: 0.5,
-              ease: 'circ.inOut',
-              snap: { textContent: 1 },
-              stagger: {
-                amount: 0.1,
-                grid: [1, newDigits.length],
-              },
-              onUpdate: function () {
-                (element.children[index] as HTMLElement).textContent = Math.floor(
-                  Math.random() * 10,
-                ).toString();
-              },
-              onComplete: function () {
-                (element.children[index] as HTMLElement).textContent = newDigits[index];
-              },
+    if (startElement && endElement) {
+      const oldStart = currentYears.start;
+      const newStart = data[selected].years.start;
+      const oldEnd = currentYears.end;
+      const newEnd = data[selected].years.end;
+
+      // Animate year changes
+      const yearUpdate = (element: HTMLDivElement, startValue: number, endValue: number) => {
+        gsap.to(
+          {},
+          {
+            duration,
+            onUpdate: function () {
+              const progress = this.progress();
+              const currentValue = Math.floor(startValue + (endValue - startValue) * progress);
+              element.textContent = currentValue.toString();
             },
-          );
-        }
-      });
-    };
-
-    const renderDigits = (value: string, ref: React.RefObject<HTMLDivElement>) => {
-      if (ref.current) {
-        ref.current.innerHTML = '';
-        value.split('').forEach(digit => {
-          const span = document.createElement('span');
-          span.textContent = digit;
-          span.setAttribute('aria-live', 'polite'); // Добавляем aria-live для динамически обновляемых цифр
-          ref.current?.appendChild(span);
-        });
-      }
-    };
-
-    if (startRef.current && endRef.current) {
-      renderDigits(currentYears.start.toString(), startRef);
-      renderDigits(currentYears.end.toString(), endRef);
-
-      animateDigit(
-        startRef.current,
-        currentYears.start.toString(),
-        data[selected].years.start.toString(),
-      );
-      animateDigit(
-        endRef.current,
-        currentYears.end.toString(),
-        data[selected].years.end.toString(),
-      );
-
-      const updateState = () => {
-        setCurrentYears(data[selected].years);
+          },
+        );
       };
 
-      gsap.delayedCall(0.5, updateState);
+      yearUpdate(startElement, oldStart, newStart);
+      yearUpdate(endElement, oldEnd, newEnd);
+
+      // Update state after animation
+      gsap.delayedCall(duration, () => {
+        setCurrentYears(data[selected].years);
+      });
     }
-  }, [selected, data]);
+  }, [selected, data, currentYears]);
 
   return (
     <div className="years">
