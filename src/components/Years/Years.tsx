@@ -21,7 +21,6 @@ const Years: React.FC = () => {
       const oldEnd = currentYears.end;
       const newEnd = data[selected].years.end;
 
-      // Animate year changes
       const yearUpdate = (element: HTMLDivElement, startValue: number, endValue: number) => {
         gsap.to(
           {},
@@ -39,7 +38,6 @@ const Years: React.FC = () => {
       yearUpdate(startElement, oldStart, newStart);
       yearUpdate(endElement, oldEnd, newEnd);
 
-      // Update state after animation
       gsap.delayedCall(duration, () => {
         setCurrentYears(data[selected].years);
       });

@@ -6,25 +6,19 @@ import 'swiper/css/pagination';
 import './InfoSlider.scss';
 import { Navigation, Pagination, FreeMode } from 'swiper/modules';
 import { useDataContext } from '../../contexts/DataContext';
+import useWindowSize from '../../hooks/useWindowSize';
 
 const InfoSlider: React.FC = () => {
   const { data, selected } = useDataContext();
   const [displayedSelected, setDisplayedSelected] = useState(selected);
   const [spaceBetween, setSpaceBetween] = useState(80);
   const sliderRef = useRef<HTMLDivElement>(null);
+  const { width } = useWindowSize();
 
   useEffect(() => {
-    const handleResize = () => {
-      const screenWidth = window.innerWidth;
-      const spacing = screenWidth <= 767 ? 25 : screenWidth <= 1023 ? 40 : 80;
-      setSpaceBetween(spacing);
-    };
-
-    window.addEventListener('resize', handleResize);
-    handleResize();
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+    const spacing = width <= 767 ? 25 : width <= 1023 ? 40 : 80;
+    setSpaceBetween(spacing);
+  }, [width]);
 
   useEffect(() => {
     if (sliderRef.current) {

@@ -2,31 +2,22 @@ import React, { useEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import './CircleMenu.scss';
 import { useDataContext } from '../../contexts/DataContext';
+import useWindowSize from '../../hooks/useWindowSize';
 
 const CircleMenu: React.FC = () => {
   const { data, selected, setSelected } = useDataContext();
   const buttons = data;
-  const [translateX, setTranslateX] = useState(265);
+  const [translateX, setTranslateX] = useState<number>(265);
   const [animatedIndex, setAnimatedIndex] = useState<number | null>(selected);
+  const { width } = useWindowSize();
 
   useEffect(() => {
-    const handleResize = () => {
-      const screenWidth = window.innerWidth;
-
-      if (screenWidth <= 1023) {
-        setTranslateX(180);
-      } else {
-        setTranslateX(265);
-      }
-    };
-
-    window.addEventListener('resize', handleResize);
-    handleResize();
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+    if (width <= 1023) {
+      setTranslateX(180);
+    } else {
+      setTranslateX(265);
+    }
+  }, [width]);
 
   useEffect(() => {
     const angle = 360 / buttons.length;
